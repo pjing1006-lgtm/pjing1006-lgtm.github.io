@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Jing Peng — Designer</title>
+<meta name="description" content="Jing Peng — designer. MDes, Emily Carr University, Vancouver.">
+<link rel="preload" as="image" href="img/bg/01-snow.jpg">
+<style>
+  @font-face{font-family:"Cormorant";src:url(fonts/cg-300.woff2) format("woff2");font-weight:300;font-style:normal;font-display:swap}
+  @font-face{font-family:"Cormorant";src:url(fonts/cg-300i.woff2) format("woff2");font-weight:300;font-style:italic;font-display:swap}
+  @font-face{font-family:"Poppins";src:url(fonts/pp-300.woff2) format("woff2");font-weight:300;font-display:swap}
+  @font-face{font-family:"Poppins";src:url(fonts/pp-400.woff2) format("woff2");font-weight:400;font-display:swap}
+
+  :root{
+    --bg:#0d0d0c; --ink:#f1ede6; --mute:#9b968d; --line:rgba(241,237,230,.16);
+    --serif:"Cormorant", "Cormorant Garamond", Georgia, serif;
+    --sans:"Poppins", system-ui, -apple-system, sans-serif;
+    --gut:clamp(18px,3vw,44px);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-weight:300;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  img{display:block;width:100%;height:auto}
+  a{color:inherit;text-decoration:none}
+  .px{padding-left:var(--gut);padding-right:var(--gut)}
+
+  /* ---------- HERO ---------- */
+  .scrolly{position:relative;color:#fff}
+  .bgfix{position:fixed;inset:0;overflow:hidden;z-index:0;background:#111}
+  main,footer{position:relative;z-index:2;background:var(--bg)}
+  .hero{position:relative;z-index:1;height:100vh;height:100svh;min-height:560px}
+  .slides{position:absolute;inset:0}
+  .slides img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.08);transition:opacity 1.8s ease, transform 9s linear}
+  .slides img.on{opacity:1;transform:scale(1)}
+  .shade{position:absolute;inset:0;background:
+    radial-gradient(ellipse at center, rgba(0,0,0,.18) 0%, rgba(0,0,0,.42) 70%),
+    linear-gradient(180deg, rgba(0,0,0,.28) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 55%, rgba(0,0,0,.72) 100%)}
+  .hero-in{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:space-between;text-align:center;padding-top:clamp(76px,11vh,120px);padding-bottom:clamp(36px,7vh,72px)}
+  .mark{display:flex;flex-direction:column;align-items:center;gap:clamp(14px,2.4vh,24px)}
+  .logo{width:clamp(84px,8vw,124px);height:auto;color:#fff;filter:drop-shadow(0 1px 12px rgba(0,0,0,.25))}
+  .name{font-family:var(--serif);font-weight:300;font-size:clamp(34px,3.4vw,52px);line-height:1;letter-spacing:.03em;margin:0 0 16px;text-shadow:0 2px 24px rgba(0,0,0,.25)}
+  .big-logo{width:clamp(220px,30vw,460px);max-height:44vh;overflow:visible;margin-top:clamp(0px,4vh,40px)}
+  .intro{max-width:820px}
+  .intro h2{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(28px,3.6vw,52px);line-height:1.05;margin:0 0 14px;letter-spacing:.005em}
+  .intro p{margin:0;font-size:clamp(14px,1.15vw,17px);line-height:1.65;opacity:.92}
+  .cue{margin-top:26px;color:#fff}
+  .dots{position:absolute;z-index:2;right:var(--gut);bottom:clamp(36px,7vh,72px);display:flex;gap:6px}
+  .dots span{width:5px;height:5px;border-radius:50%;background:#fff;opacity:.35;transition:opacity .6s}
+  .dots span.on{opacity:1}
+  .bar{position:absolute;z-index:3;inset:0 0 auto 0;display:flex;justify-content:space-between;align-items:center;height:60px;font-size:13px;color:#fff}
+  .bar nav a{margin-left:22px;opacity:.85}
+  .bar nav a:hover{opacity:1}
+
+  /* ---------- ABOUT (scrolls over the fixed photos) ---------- */
+  .about{position:relative;z-index:1;
+    background:linear-gradient(180deg,rgba(13,13,12,0) 0,rgba(13,13,12,.74) 26vh,rgba(13,13,12,.74) calc(100% - 46vh),var(--bg) 100%)}
+  .about-panel{padding-top:34vh;padding-bottom:40vh}
+  .about-in{max-width:620px;margin-left:clamp(0px,8vw,150px)}
+  .about .kicker{font-size:14px;margin:0 0 28px;opacity:.9}
+  .about h2{font-family:var(--serif);font-weight:300;text-transform:uppercase;font-size:clamp(54px,7.4vw,124px);line-height:.95;letter-spacing:.005em;margin:0 0 56px}
+  .about .lead{font-size:clamp(16px,1.35vw,19px);line-height:1.8;margin:0 0 36px}
+  .aq{margin:72px 0 0;padding:0}
+  .aq p{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(26px,3.25vw,58px);line-height:1.15;margin:0;white-space:nowrap;text-align:center}
+  .aq cite{display:block;text-align:right;margin-top:22px;font-style:normal;font-size:13px;letter-spacing:.06em;color:#cfcac1}
+  .aq cite i{font-style:italic;letter-spacing:0}
+  .about p.body{font-size:15px;line-height:2;margin:0 0 18px;color:#e4dfd6}
+
+  /* ---------- SECTIONS ---------- */
+  .label{display:flex;justify-content:space-between;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);padding:96px 0 18px;border-bottom:1px solid var(--line)}
+  .serif{font-family:var(--serif);font-weight:300}
+
+  .index{list-style:none;margin:0;padding:0}
+  .index a{display:grid;grid-template-columns:44px 1fr auto;gap:var(--gut);align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);transition:padding .3s, color .3s}
+  .index .n{font-size:12px;color:var(--mute)}
+  .index .t{font-family:var(--serif);font-weight:300;font-size:clamp(26px,3vw,40px);line-height:1.05}
+  .index .k{font-size:12px;color:var(--mute)}
+  .index a:hover{padding-left:14px}
+  .index a:hover .t{font-style:italic}
+
+  /* featured */
+  .feat{position:relative;margin-top:72px}
+  .feat + .feat{margin-top:120px}
+  .feat-body .more{margin-top:20px;display:flex;gap:28px}
+  .feat .img{position:relative;overflow:hidden}
+  .feat .img{display:block;background:#1a1a19}
+  .feat .img img{aspect-ratio:16/9;object-fit:cover}
+  .feat-body{padding-top:22px}
+  .feat-body .play{margin-top:20px}
+  .feat h3{font-family:var(--serif);font-weight:300;font-size:clamp(48px,7vw,104px);line-height:.92;margin:0}
+  .feat p{margin:12px 0 0;max-width:46ch;color:#cfcac1}
+  .play,.cue,.w .more a,.feat-body .more a{display:inline-block;font-family:var(--sans);font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);border-bottom:1px solid rgba(241,237,230,.5);padding-bottom:3px;opacity:.8;transition:opacity .3s,border-color .3s}
+  .play:hover,.cue:hover,.w .more a:hover,.feat-body .more a:hover{opacity:1;border-color:var(--ink)}
+  .strip{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+  .strip img{aspect-ratio:16/10;object-fit:cover}
+
+  /* grid */
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:72px var(--gut);margin-top:56px}
+  .w{margin:0}
+  .w .img{overflow:hidden;background:#1a1a19}
+  .w img{transition:transform .8s ease, filter .8s ease;filter:saturate(.9)}
+  .w:hover img{transform:scale(1.03);filter:saturate(1)}
+  .w .cap{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-top:16px}
+  .w h3{font-family:var(--serif);font-weight:300;font-size:clamp(26px,2.4vw,34px);line-height:1.05;margin:0}
+  .w .k{font-size:12px;color:var(--mute);white-space:nowrap}
+  .w p{margin:6px 0 0;color:#bdb8af;max-width:44ch}
+  .w .more{margin-top:14px;display:flex;gap:24px}
+  .s7{grid-column:span 7}.s5{grid-column:span 5}.s6{grid-column:span 6}.s4{grid-column:span 4}.s8{grid-column:span 8}
+  .r43 img{aspect-ratio:4/3;object-fit:cover}
+  .r34 img{aspect-ratio:3/4;object-fit:cover}
+  .r169 img{aspect-ratio:16/10;object-fit:cover}
+  .top img{object-position:top}
+  .fit .img{background:#171716}
+  .fit img{object-fit:contain;object-position:center}
+
+  .q{padding-top:160px;padding-bottom:160px;text-align:center}
+  .q p{font-family:var(--serif);font-weight:300;font-style:italic;font-size:clamp(34px,4.8vw,72px);line-height:1.08;margin:0 auto;max-width:20ch}
+  .q small{display:block;margin:28px auto 0;font-size:13px;color:var(--mute);max-width:52ch}
+
+  footer{padding-top:28px;padding-bottom:28px;border-top:1px solid var(--line)}
+  .foot{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px 24px;font-size:12px;color:var(--mute)}
+  .fl{display:inline-flex;align-items:center;gap:12px}
+  .flogo{width:26px;height:auto;color:var(--ink);flex:none}
+  .foot a{color:var(--ink);border-bottom:1px solid var(--line)}
+
+  /* detail overlay */
+  .detail{display:none;position:fixed;inset:0;z-index:50;background:var(--bg);overflow-y:auto;-webkit-overflow-scrolling:touch}
+  .detail:target{display:block}
+  .detail-bar{position:sticky;top:0;z-index:2;display:flex;justify-content:space-between;align-items:center;height:68px;background:rgba(13,13,12,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .detail-bar h2{font-family:var(--serif);font-weight:300;font-size:clamp(22px,2.2vw,30px);margin:0}
+  .detail-pages{max-width:1400px;margin:0 auto;padding-top:32px;padding-bottom:32px;display:grid;gap:20px}
+  .detail-pages img{background:#1a1a19}
+  .detail-pages.two{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .detail-pages .seam{margin-top:-20px}
+  .detail-pages .gap-top{margin-top:48px}
+  .detail-pages .narrow{max-width:820px;justify-self:center}
+  .detail-foot{text-align:center;padding-bottom:72px}
+
+  @media (max-width:820px){
+    .aq p{white-space:normal;text-align:left}
+    .about-in{margin-left:0}
+    .detail-pages.two{grid-template-columns:1fr}
+    .s7,.s5,.s6,.s4,.s8{grid-column:1/-1}
+    .grid{gap:56px var(--gut)}
+    .index .k{display:none}
+    .index a{grid-template-columns:32px 1fr}
+    .feat-body{grid-template-columns:1fr}
+    .bar nav a.h{display:none}
+    .dots{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .slides img{transition:opacity 1s ease;transform:none}
+    .slides img.on{transform:none}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO + ABOUT share one fixed slideshow -->
+<div class="scrolly" id="top">
+  <div class="bgfix" aria-hidden="true">
+    <div class="slides" aria-hidden="true">
+      <img class="on" src="img/bg/01-snow.jpg" alt="">
+      <img data-src="img/bg/02-cat-grey.jpg" alt="">
+      <img data-src="img/bg/03-sky.jpg" alt="">
+      <img data-src="img/bg/04-blossom.jpg" alt="">
+      <img data-src="img/bg/05-lamp.jpg" alt="">
+      <img data-src="img/bg/06-sunset.jpg" alt="">
+      <img data-src="img/bg/07-cat-ginger.jpg" alt="">
+      <img data-src="img/bg/08-matcha.jpg" alt="">
+      <img data-src="img/bg/09-drink.jpg" alt="">
+    </div>
+    <div class="shade"></div>
+    <div class="dots"></div>
+  </div>
+
+  <header class="hero">
+    <div class="bar px">
+      <a href="#top">Jing Peng</a>
+      <nav><a class="h" href="#about">About</a><a class="h" href="#work">Work</a><a class="h" href="#before">Archive</a><a href="#contact">Contact</a></nav>
+    </div>
+
+    <div class="hero-in px">
+      <svg class="logo big-logo" viewBox="-0.5 -0.5 42 36" overflow="visible" fill="none" role="img" aria-label="Jing Peng logo"><mask id="jp-m1" fill="white"><path d="M29.606 7.13011C30.7654 5.94648 32.6648 5.92685 33.8485 7.08625L40.9671 14.0592L29.2758 25.9947L22.1572 19.0218C20.9736 17.8624 20.9539 15.963 22.1133 14.7794L29.606 7.13011Z"/></mask><path d="M40.9671 14.0592L33.8485 7.08625C32.6648 5.92685 30.7654 5.94648 29.606 7.13011L22.1133 14.7794C20.9539 15.963 20.9736 17.8624 22.1572 19.0218L29.2758 25.9947L40.9671 14.0592Z" stroke-width="2" stroke-linejoin="round" stroke="currentColor" mask="url(#jp-m1)"/><path d="M34.4196 20.0144L20.4201 34.2977L10.2101 24.2905L2.1425 16.3833C0.959229 15.2235 0.94017 13.3241 2.09993 12.1408L6.99976 7.14166" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg>
+      <div class="intro">
+        <h1 class="name">Jing Peng</h1>
+        <p>Designer from Nanchang, China, now in the MDes program at Emily Carr University, Vancouver.<br>I work across wearables, websites, installations and games.</p>
+        <a class="cue" href="#about">See more</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="about" id="about">
+    <div class="about-panel px">
+      <div class="about-in">
+        <p class="kicker">Introduction</p>
+        <h2>About<br>me</h2>
+        <p class="lead">I'm a designer from Nanchang, China, now based in Vancouver.</p>
+        <p class="body">I studied Art and Design at the University of Alberta, and I'm now in the MDes program at Emily Carr University.</p>
+        <p class="body">I'm interested in the things that have always been part of everyday life, but that we've learned not to see. Many of them sit just outside the edges of the systems we live by: what a standard leaves out, what a diagnosis misses, what a routine quietly decides for us.</p>
+        <p class="body">My work tries to bring those edges into view. I make things people can wear, touch, play or step into, so they can feel how something they usually overlook is shaping them, and the lives around them.</p>
+      </div>
+      <blockquote class="aq">
+        <p>&ldquo;To question that which seems to have ceased forever to astonish us.&rdquo;</p>
+        <cite>&mdash; Georges Perec, <i>Approaches to What?</i></cite>
+      </blockquote>
+    </div>
+  </section>
+  </div>
+
+<main>
+  <section class="px" id="work">
+    <div class="label"><span>Index</span><span>2025 — 2026</span></div>
+    <ol class="index">
+      <li><a href="#human-show"><span class="n">01</span><span class="t">Human Show</span><span class="k">Web game · 2026</span></a></li>
+      <li><a href="#joo-us"><span class="n">02</span><span class="t">Joo Us! Sign GIF Booth</span><span class="k">Service · 2026</span></a></li>
+      <li><a href="#oats"><span class="n">03</span><span class="t">Oats' Lab</span><span class="k">Object · 2026</span></a></li>
+      <li><a href="#pulsebond"><span class="n">04</span><span class="t">PulseBond</span><span class="k">Wearable · May 2025</span></a></li>
+      <li><a href="#screen"><span class="n">05</span><span class="t">The Screen Between Us</span><span class="k">Installation · Oct 2025</span></a></li>
+      <li><a href="#theraskin"><span class="n">06</span><span class="t">TheraSkin</span><span class="k">Wearable · Jul 2025</span></a></li>
+      <li><a href="#angry-birds"><span class="n">07</span><span class="t">Angry Birds with Black Cats</span><span class="k">Game · Aug 2025</span></a></li>
+      <li><a href="#gynapath"><span class="n">08</span><span class="t">GynaPath</span><span class="k">Web · May 2025</span></a></li>
+      <li><a href="#hearing"><span class="n">09</span><span class="t">Hearing Healing</span><span class="k">Editorial · Web · Mar 2025</span></a></li>
+    </ol>
+
+    <div class="label"><span>Now — MDes, Fall 2026</span><span>01 — 03</span></div>
+
+    <article class="feat" id="human-show">
+      <a class="img" href="https://pjing1006-lgtm.github.io/Human-Show/"><img src="img/human-show-room.jpg" alt="Human Show: illustrated living room with outlined human figures and a ginger cat" loading="lazy"></a>
+      <div class="strip">
+        <img src="img/human-show-door.jpg" alt="A black cat peeks through a lit doorway" loading="lazy">
+        <img src="img/human-show-corridor.jpg" alt="Five lit frames on a dark wall: 150 years of breed history" loading="lazy">
+        <img src="img/human-show-judge.jpg" alt="The judging table: cat eyes watching from the dark above a pool of light" loading="lazy">
+      </div>
+      <div class="feat-body">
+          <h3>Human Show</h3>
+          <p>A game where cats breed humans for the show ring. You play one of the litter.</p>
+          <a class="play" href="https://pjing1006-lgtm.github.io/Human-Show/">Play the demo</a>
+      </div>
+    </article>
+
+    <article class="feat" id="joo-us">
+      <div class="img"><img src="img/joo-us-home.jpg" alt="Joo Us! Sign GIF Booth start screen with GIF cards of people signing" loading="lazy"></div>
+      <div class="feat-body">
+        <h3>Joo Us! Sign GIF Booth</h3>
+        <p>Learn a sign, record it, keep it as a GIF. A pop-up booth for the studio, made with Summer Fu.</p>
+        <div class="more"><a href="https://drive.google.com/file/d/1dTPRFPjjrONfv-5yASmj0h5uU-k8OYcj/view?usp=sharing">Watch the demo</a><a href="#joo-us-detail">Detail</a></div>
+      </div>
+    </article>
+
+    <article class="feat" id="oats">
+      <div class="img"><img src="img/oats-pair.jpg" alt="Oats' Lab: both sides of a magnetic planning board, Week Notes and Oats' Lab" loading="lazy"></div>
+      <div class="feat-body">
+        <h3>Oats' Lab</h3>
+        <p>Not a recipe, but magnetic tiles for a classmate to invent her own overnight oats.</p>
+        <div class="more"><a href="#oats-detail">Detail</a></div>
+      </div>
+    </article>
+  </section>
+
+
+  <section class="px" id="before">
+    <div class="label"><span>Archive — before ECU</span><span>04 — 09</span></div>
+    <div class="grid">
+      <figure class="w s6 r169 fit" id="pulsebond">
+        <div class="img"><img src="img/pulsebond-wide.jpg" alt="PulseBond cover with a long-haired cat" loading="lazy"></div>
+        <figcaption><div class="cap"><h3>PulseBond</h3><span class="k">04 · May 2025</span></div>
+        <p>A monitoring vest for cats at risk of heart disease, after two friends' cats died of it.</p><div class="more"><a href="#pulsebond-detail">Detail</a></div></figcaption>
+      </figure>
+      <figure class="w s6 r169 fit" id="screen">
+        <div class="img"><img src="img/screen-between-us.jpg" alt="Two silhouettes facing a screen of distorted faces" loading="lazy"></div>
+        <figcaption><div class="cap"><h3>The Screen Between Us</h3><span class="k">05 · Oct 2025</span></div>
+        <p>Emotion sensing that distorts how two people see each other.</p><div class="more"><a href="#screen-detail">Detail</a></div></figcaption>
+      </figure>
+      <figure class="w s6 r169 fit" id="theraskin">
+        <div class="img"><img src="img/theraskin.jpg" alt="TheraSkin: glowing hexagons on a shoulder" loading="lazy"></div>
+        <figcaption><div class="cap"><h3>TheraSkin</h3><span class="k">06 · Jul 2025</span></div>
+        <p>Emotional care for women, delivered through warmth and touch on the skin.</p><div class="more"><a href="#theraskin-detail">Detail</a></div></figcaption>
+      </figure>
+      <figure class="w s6 r169 fit" id="angry-birds">
+        <div class="img"><img src="img/angry-birds.jpg" alt="Game render of a black cat" loading="lazy"></div>
+        <figcaption><div class="cap"><h3>Angry Birds with Black Cats</h3><span class="k">07 · Aug 2025</span></div>
+        <p>A game that trains focus and body control for children with ADHD.</p><div class="more"><a href="#angry-birds-detail">Detail</a></div></figcaption>
+      </figure>
+      <figure class="w s6 r169 fit" id="gynapath">
+        <div class="img"><img src="img/gynapath.jpg" alt="GynaPath website" loading="lazy"></div>
+        <figcaption><div class="cap"><h3>GynaPath</h3><span class="k">08 · Group · May 2025</span></div>
+        <p>A guide through PCOS and endometriosis diagnosis in Alberta.</p><div class="more"><a href="#gynapath-detail">Detail</a></div></figcaption>
+      </figure>
+      <figure class="w s6 r169 fit" id="hearing">
+        <div class="img"><img src="img/hearing-healing-web.jpg" alt="Hearing Healing website landing page" loading="lazy"></div>
+        <figcaption><div class="cap"><h3>Hearing Healing</h3><span class="k">09 · Mar 2025</span></div>
+        <p>Music as healing for students who struggle to say how they feel in a second language.</p><div class="more"><a href="#hearing-detail">Detail</a></div></figcaption>
+      </figure>
+    </div>
+    <div style="height:140px"></div>
+  </section>
+</main>
+
+<footer class="px" id="contact">
+  <div class="foot">
+    <span class="fl"><svg class="logo flogo" viewBox="-0.5 -0.5 42 36" overflow="visible" fill="none" aria-hidden="true"><mask id="jp-m2" fill="white"><path d="M29.606 7.13011C30.7654 5.94648 32.6648 5.92685 33.8485 7.08625L40.9671 14.0592L29.2758 25.9947L22.1572 19.0218C20.9736 17.8624 20.9539 15.963 22.1133 14.7794L29.606 7.13011Z"/></mask><path d="M40.9671 14.0592L33.8485 7.08625C32.6648 5.92685 30.7654 5.94648 29.606 7.13011L22.1133 14.7794C20.9539 15.963 20.9736 17.8624 22.1572 19.0218L29.2758 25.9947L40.9671 14.0592Z" stroke-width="2" stroke-linejoin="round" stroke="currentColor" mask="url(#jp-m2)"/><path d="M34.4196 20.0144L20.4201 34.2977L10.2101 24.2905L2.1425 16.3833C0.959229 15.2235 0.94017 13.3241 2.09993 12.1408L6.99976 7.14166" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor"/></svg><span>Jing Peng (she/her) · MDes, Emily Carr University · Studio Pod F · <a href="mailto:jpeng56786@ecuad.ca">jpeng56786@ecuad.ca</a></span></span>
+    <a href="https://drive.google.com/drive/folders/1SHiOQhby2_V7IbFDyHGLJem61TCcL5Pp?usp=drive_link">Full portfolio ↗</a>
+  </div>
+</footer>
+
+<section class="detail" id="pulsebond-detail" aria-label="PulseBond details">
+  <div class="detail-bar px"><h2>PulseBond</h2><a class="play" href="#pulsebond">Close</a></div>
+  <div class="detail-pages px">
+      <img src="img/doc/pulsebond/01.jpg" alt="PulseBond documentation, image 1 of 7" loading="lazy" width="2000" height="934">
+      <img src="img/doc/pulsebond/02.jpg" alt="PulseBond documentation, image 2 of 7" loading="lazy" width="2000" height="934">
+      <img src="img/doc/pulsebond/03.jpg" alt="PulseBond documentation, image 3 of 7" loading="lazy" width="2000" height="934">
+      <img src="img/doc/pulsebond/04.jpg" alt="PulseBond documentation, image 4 of 7" loading="lazy" width="2000" height="934">
+      <img src="img/doc/pulsebond/05.jpg" alt="PulseBond documentation, image 5 of 7" loading="lazy" width="2000" height="934">
+      <img src="img/doc/pulsebond/06.jpg" alt="PulseBond documentation, image 6 of 7" loading="lazy" width="2000" height="934">
+      <img src="img/doc/pulsebond/07.jpg" alt="PulseBond documentation, image 7 of 7" loading="lazy" width="2000" height="934">
+  </div>
+  <div class="detail-foot"><a class="play" href="#pulsebond">Back to work</a></div>
+</section>
+
+<section class="detail" id="screen-detail" aria-label="The Screen Between Us details">
+  <div class="detail-bar px"><h2>The Screen Between Us</h2><a class="play" href="#screen">Close</a></div>
+  <div class="detail-pages px">
+      <img src="img/doc/screen/01.jpg" alt="The Screen Between Us documentation, image 1 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/screen/02.jpg" alt="The Screen Between Us documentation, image 2 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/screen/03.jpg" alt="The Screen Between Us documentation, image 3 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/screen/04.jpg" alt="The Screen Between Us documentation, image 4 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/screen/05.jpg" alt="The Screen Between Us documentation, image 5 of 5" loading="lazy" width="2000" height="934">
+  </div>
+  <div class="detail-foot"><a class="play" href="#screen">Back to work</a></div>
+</section>
+
+<section class="detail" id="theraskin-detail" aria-label="TheraSkin details">
+  <div class="detail-bar px"><h2>TheraSkin</h2><a class="play" href="#theraskin">Close</a></div>
+  <div class="detail-pages px">
+      <img src="img/doc/theraskin/01.jpg" alt="TheraSkin documentation, image 1 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/theraskin/02.jpg" alt="TheraSkin documentation, image 2 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/theraskin/03.jpg" alt="TheraSkin documentation, image 3 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/theraskin/04.jpg" alt="TheraSkin documentation, image 4 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/theraskin/05.jpg" alt="TheraSkin documentation, image 5 of 5" loading="lazy" width="2000" height="934">
+  </div>
+  <div class="detail-foot"><a class="play" href="#theraskin">Back to work</a></div>
+</section>
+
+<section class="detail" id="hearing-detail" aria-label="Hearing Healing details">
+  <div class="detail-bar px"><h2>Hearing Healing</h2><a class="play" href="#hearing">Close</a></div>
+  <div class="detail-pages px">
+      <img src="img/doc/hearing/web-1.jpg" alt="Hearing Healing website, part 1 of 3" loading="lazy" width="1600" height="1800">
+      <img class="seam" src="img/doc/hearing/web-2.jpg" alt="Hearing Healing website, part 2 of 3" loading="lazy" width="1600" height="1800">
+      <img class="seam" src="img/doc/hearing/web-3.jpg" alt="Hearing Healing website, part 3 of 3" loading="lazy" width="1600" height="1400">
+      <img class="gap-top" src="img/doc/hearing/mag-1.jpg" alt="Hearing Healing magazine, front and back cover" loading="lazy" width="2000" height="1295">
+      <img src="img/doc/hearing/mag-2.jpg" alt="Hearing Healing magazine, pages 2–3" loading="lazy" width="2000" height="1295">
+      <img src="img/doc/hearing/mag-3.jpg" alt="Hearing Healing magazine, pages 4–5" loading="lazy" width="2000" height="1295">
+      <img src="img/doc/hearing/mag-4.jpg" alt="Hearing Healing magazine, pages 6–7" loading="lazy" width="2000" height="1295">
+  </div>
+  <div class="detail-foot"><a class="play" href="#hearing">Back to work</a></div>
+</section>
+
+<section class="detail" id="gynapath-detail" aria-label="GynaPath details">
+  <div class="detail-bar px"><h2>GynaPath</h2><a class="play" href="#gynapath">Close</a></div>
+  <div class="detail-pages px">
+      <img src="img/doc/gynapath/01.jpg" alt="GynaPath documentation, image 1 of 32" loading="lazy" width="1600" height="1800">
+      <img class="seam" src="img/doc/gynapath/02.jpg" alt="GynaPath documentation, image 2 of 32" loading="lazy" width="1600" height="1800">
+      <img class="seam" src="img/doc/gynapath/03.jpg" alt="GynaPath documentation, image 3 of 32" loading="lazy" width="1600" height="1800">
+      <img class="seam" src="img/doc/gynapath/04.jpg" alt="GynaPath documentation, image 4 of 32" loading="lazy" width="1600" height="1800">
+      <img class="seam" src="img/doc/gynapath/05.jpg" alt="GynaPath documentation, image 5 of 32" loading="lazy" width="1600" height="420">
+      <img src="img/doc/gynapath/07.jpg" alt="GynaPath documentation, image 7 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/08.jpg" alt="GynaPath documentation, image 8 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/09.jpg" alt="GynaPath documentation, image 9 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/10.jpg" alt="GynaPath documentation, image 10 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/11.jpg" alt="GynaPath documentation, image 11 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/12.jpg" alt="GynaPath documentation, image 12 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/13.jpg" alt="GynaPath documentation, image 13 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/14.jpg" alt="GynaPath documentation, image 14 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/15.jpg" alt="GynaPath documentation, image 15 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/16.jpg" alt="GynaPath documentation, image 16 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/17.jpg" alt="GynaPath documentation, image 17 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/18.jpg" alt="GynaPath documentation, image 18 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/19.jpg" alt="GynaPath documentation, image 19 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/20.jpg" alt="GynaPath documentation, image 20 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/21.jpg" alt="GynaPath documentation, image 21 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/22.jpg" alt="GynaPath documentation, image 22 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/23.jpg" alt="GynaPath documentation, image 23 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/24.jpg" alt="GynaPath documentation, image 24 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/25.jpg" alt="GynaPath documentation, image 25 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/26.jpg" alt="GynaPath documentation, image 26 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/27.jpg" alt="GynaPath documentation, image 27 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/28.jpg" alt="GynaPath documentation, image 28 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/29.jpg" alt="GynaPath documentation, image 29 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/30.jpg" alt="GynaPath documentation, image 30 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/31.jpg" alt="GynaPath documentation, image 31 of 32" loading="lazy" width="1600" height="900">
+      <img src="img/doc/gynapath/32.jpg" alt="GynaPath documentation, image 32 of 32" loading="lazy" width="1600" height="900">
+  </div>
+  <div class="detail-foot"><a class="play" href="#gynapath">Back to work</a></div>
+</section>
+
+<section class="detail" id="angry-birds-detail" aria-label="Angry Birds with Black Cats details">
+  <div class="detail-bar px"><h2>Angry Birds with Black Cats</h2><a class="play" href="#angry-birds">Close</a></div>
+  <div class="detail-pages px">
+      <img src="img/doc/angry-birds/01.jpg" alt="Angry Birds with Black Cats documentation, image 1 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/angry-birds/02.jpg" alt="Angry Birds with Black Cats documentation, image 2 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/angry-birds/03.jpg" alt="Angry Birds with Black Cats documentation, image 3 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/angry-birds/04.jpg" alt="Angry Birds with Black Cats documentation, image 4 of 5" loading="lazy" width="2000" height="934">
+      <img src="img/doc/angry-birds/05.jpg" alt="Angry Birds with Black Cats documentation, image 5 of 5" loading="lazy" width="2000" height="934">
+  </div>
+  <div class="detail-foot"><a class="play" href="#angry-birds">Back to work</a></div>
+</section>
+
+<section class="detail" id="oats-detail" aria-label="Oats' Lab details">
+  <div class="detail-bar px"><h2>Oats' Lab</h2><a class="play" href="#oats">Close</a></div>
+  <div class="detail-pages two px">
+      <img src="img/oats-doc/01.jpg" alt="Oats' Lab documentation, page 1: the board, ingredient tiles and how they are sorted" loading="lazy" width="1200" height="1553">
+      <img src="img/oats-doc/02.jpg" alt="Oats' Lab documentation, page 2: sketches and reflection" loading="lazy" width="1200" height="1553">
+      <img src="img/oats-doc/photo-week.jpg" alt="Week Notes side of the board with ingredient magnets for each day" loading="lazy" width="1200" height="1600">
+      <img src="img/oats-doc/photo-lab.jpg" alt="Oats' Lab side of the board with fruit, oats and seed magnets" loading="lazy" width="1200" height="1600">
+  </div>
+  <div class="detail-foot"><a class="play" href="#oats">Back to work</a></div>
+</section>
+
+<section class="detail" id="joo-us-detail" aria-label="Joo Us! Sign GIF Booth details">
+  <div class="detail-bar px"><h2>Joo Us! Sign GIF Booth</h2><a class="play" href="#joo-us">Close</a></div>
+  <div class="detail-pages px">
+      <img src="img/joo-us-doc/01.jpg" alt="Joo Us! Sign GIF Booth documentation, page 1 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/02.jpg" alt="Joo Us! Sign GIF Booth documentation, page 2 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/03.jpg" alt="Joo Us! Sign GIF Booth documentation, page 3 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/04.jpg" alt="Joo Us! Sign GIF Booth documentation, page 4 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/05.jpg" alt="Joo Us! Sign GIF Booth documentation, page 5 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/06.jpg" alt="Joo Us! Sign GIF Booth documentation, page 6 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/07.jpg" alt="Joo Us! Sign GIF Booth documentation, page 7 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/08.jpg" alt="Joo Us! Sign GIF Booth documentation, page 8 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/09.jpg" alt="Joo Us! Sign GIF Booth documentation, page 9 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/10.jpg" alt="Joo Us! Sign GIF Booth documentation, page 10 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/11.jpg" alt="Joo Us! Sign GIF Booth documentation, page 11 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/12.jpg" alt="Joo Us! Sign GIF Booth documentation, page 12 of 13" loading="lazy" width="1800" height="1012">
+      <img src="img/joo-us-doc/13.jpg" alt="Joo Us! Sign GIF Booth documentation, page 13 of 13" loading="lazy" width="1800" height="1012">
+  </div>
+  <div class="detail-foot"><a class="play" href="#joo-us">Back to work</a></div>
+</section>
+
+<script>
+(function(){
+  var imgs=[].slice.call(document.querySelectorAll('.slides img'));
+  var dots=document.querySelector('.dots');
+  imgs.forEach(function(_,i){var s=document.createElement('span');if(i===0)s.className='on';dots.appendChild(s);});
+  var ds=[].slice.call(dots.children);
+  function load(i){var im=imgs[i];if(im&&im.dataset.src&&!im.getAttribute('src')){im.src=im.dataset.src;}}
+  load(1);
+  var cur=0;
+  setInterval(function(){
+    var next=(cur+1)%imgs.length;
+    load(next); load((next+1)%imgs.length);
+    if(!imgs[next].complete){return;}
+    imgs[cur].classList.remove('on'); ds[cur].classList.remove('on');
+    imgs[next].classList.add('on'); ds[next].classList.add('on');
+    cur=next;
+  },5200);
+})();
+</script>
+</body>
+</html>
